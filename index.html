@@ -3,64 +3,328 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MirrorKit — Support</title>
+<title>MirrorKit — Mirror your iPhone on your Mac</title>
+<meta name="description" content="A native macOS app that mirrors your iPhone screen in real time over USB. No latency, no setup, no subscription.">
+<meta property="og:title" content="MirrorKit — Mirror your iPhone on your Mac">
+<meta property="og:description" content="A native macOS app that mirrors your iPhone screen in real time over USB.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📱%3C/text%3E%3C/svg%3E">
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 24px; color: #1d1d1f; line-height: 1.6; }
-  h1 { font-size: 32px; margin-bottom: 4px; }
-  h2 { font-size: 20px; margin-top: 32px; }
-  a { color: #0071e3; }
-  code { background: #f5f5f7; padding: 2px 6px; border-radius: 4px; font-size: 90%; }
+  :root {
+    --bg: #0b0b14;
+    --bg-2: #14132a;
+    --fg: #f5f5f7;
+    --fg-dim: #a8a5c2;
+    --accent: #7c5cff;
+    --accent-2: #4dd9ff;
+    --card: rgba(255, 255, 255, 0.04);
+    --border: rgba(255, 255, 255, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  body::before, body::after {
+    content: "";
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+    pointer-events: none;
+  }
+  body::before {
+    top: -200px; left: -200px;
+    background: radial-gradient(circle, rgba(124, 92, 255, 0.35), transparent 70%);
+  }
+  body::after {
+    bottom: -200px; right: -200px;
+    background: radial-gradient(circle, rgba(77, 217, 255, 0.25), transparent 70%);
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(11, 11, 20, 0.7);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .container {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    font-weight: 700; font-size: 18px; letter-spacing: -0.3px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-icon {
+    width: 28px; height: 28px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  nav ul {
+    display: flex; gap: 32px; list-style: none;
+    font-size: 14px; color: var(--fg-dim);
+  }
+  nav ul a:hover { color: var(--fg); }
+  @media (max-width: 720px) { nav ul { display: none; } }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 26px; border-radius: 999px;
+    font-size: 15px; font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border: none; cursor: pointer;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: white;
+    box-shadow: 0 10px 40px rgba(124, 92, 255, 0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 50px rgba(124, 92, 255, 0.55); }
+  .btn-secondary {
+    background: var(--card); color: var(--fg);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { background: rgba(255, 255, 255, 0.08); }
+
+  .hero { padding: 100px 0 80px; text-align: center; }
+  .hero .badge {
+    display: inline-block; padding: 6px 14px; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--border);
+    font-size: 13px; color: var(--fg-dim);
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 1.05; letter-spacing: -2px; font-weight: 800;
+    background: linear-gradient(180deg, #ffffff 30%, #a8a5c2 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin-bottom: 24px;
+  }
+  .hero p.lead {
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--fg-dim);
+    max-width: 640px; margin: 0 auto 40px;
+  }
+  .hero-cta {
+    display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+  .hero-image {
+    max-width: 100%; border-radius: 18px;
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border);
+  }
+
+  section { padding: 100px 0; }
+  section h2 {
+    font-size: clamp(32px, 4vw, 48px); text-align: center;
+    letter-spacing: -1px; font-weight: 800; margin-bottom: 16px;
+    background: linear-gradient(180deg, #ffffff 50%, #a8a5c2 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  section .subtitle {
+    text-align: center; color: var(--fg-dim);
+    font-size: 18px; max-width: 560px; margin: 0 auto 60px;
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .feature {
+    padding: 32px; border-radius: 18px;
+    background: var(--card); border: 1px solid var(--border);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .feature:hover { transform: translateY(-4px); border-color: rgba(124, 92, 255, 0.4); }
+  .feature .icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(124, 92, 255, 0.2), rgba(77, 217, 255, 0.2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 20px;
+  }
+  .feature h3 { font-size: 18px; margin-bottom: 8px; font-weight: 700; }
+  .feature p { color: var(--fg-dim); font-size: 15px; }
+
+  .shots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 20px;
+  }
+  .shots img {
+    width: 100%; border-radius: 14px;
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease;
+  }
+  .shots img:hover { transform: scale(1.02); }
+
+  .pricing-card {
+    max-width: 440px; margin: 0 auto; padding: 48px 40px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(124, 92, 255, 0.12), rgba(77, 217, 255, 0.04));
+    border: 1px solid rgba(124, 92, 255, 0.3);
+    border-radius: 24px;
+    box-shadow: 0 30px 80px rgba(124, 92, 255, 0.2);
+  }
+  .pricing-card .price {
+    font-size: 64px; font-weight: 800; letter-spacing: -2px;
+    margin: 16px 0 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .pricing-card .price-note { color: var(--fg-dim); font-size: 15px; margin-bottom: 32px; }
+  .pricing-card ul { list-style: none; text-align: left; margin-bottom: 32px; }
+  .pricing-card li {
+    padding: 10px 0; color: var(--fg-dim); font-size: 15px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pricing-card li::before { content: "✓"; color: var(--accent-2); font-weight: 700; }
+
+  footer {
+    padding: 60px 0 40px; border-top: 1px solid var(--border);
+    text-align: center; color: var(--fg-dim); font-size: 14px;
+  }
+  footer .links {
+    display: flex; justify-content: center; gap: 28px; margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  footer .links a:hover { color: var(--fg); }
 </style>
 </head>
 <body>
 
-<h1>MirrorKit — Support</h1>
+<nav>
+  <div class="container">
+    <a href="#" class="logo">
+      <span class="logo-icon">📱</span>
+      MirrorKit
+    </a>
+    <ul>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#screenshots">Screenshots</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+  </div>
+</nav>
 
-<p>Need help with MirrorKit? You're in the right place.</p>
+<header class="hero">
+  <div class="container">
+    <span class="badge">✨ Now available on the Mac App Store</span>
+    <h1>Your iPhone,<br>on your Mac.</h1>
+    <p class="lead">A native macOS app that mirrors your iPhone screen in real time over USB. No Wi-Fi. No latency. No subscriptions.</p>
+    <div class="hero-cta">
+      <a href="https://apps.apple.com/app/id6761739430" class="btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-3.18 2.6-4.71 2.72-4.78-1.49-2.17-3.79-2.47-4.61-2.5-1.96-.2-3.83 1.16-4.83 1.16-1.01 0-2.55-1.13-4.19-1.1-2.16.03-4.15 1.26-5.27 3.19-2.25 3.9-.58 9.66 1.61 12.83 1.07 1.55 2.34 3.29 4 3.23 1.61-.07 2.22-1.04 4.16-1.04 1.94 0 2.49 1.04 4.19 1 1.73-.03 2.83-1.57 3.89-3.13 1.23-1.79 1.74-3.53 1.77-3.62-.04-.02-3.4-1.31-3.44-5.19zM13.92 3.2c.89-1.08 1.49-2.59 1.32-4.08-1.28.05-2.83.85-3.76 1.93-.83.96-1.55 2.49-1.36 3.96 1.43.11 2.9-.73 3.8-1.81z"/></svg>
+        Download on the App Store
+      </a>
+      <a href="https://github.com/TrabelsiAchraf/MirrorApp" class="btn btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 00-3.79 23.4c.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.41-4.04-1.41-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.13 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.58A12 12 0 0012 .3"/></svg>
+        View on GitHub
+      </a>
+    </div>
+    <img src="hero.png" alt="MirrorKit displaying an iPhone on macOS" class="hero-image">
+  </div>
+</header>
 
-<h2>Quick Start</h2>
-<ol>
-  <li>Launch MirrorKit on your Mac.</li>
-  <li>Connect your iPhone to your Mac with a USB or USB-C cable.</li>
-  <li>On your iPhone, tap <strong>Trust</strong> when asked.</li>
-  <li>Your iPhone screen will appear inside MirrorKit within a few seconds.</li>
-</ol>
+<section id="features">
+  <div class="container">
+    <h2>Built for the way you work</h2>
+    <p class="subtitle">Demos, recordings, presentations, debugging — all in a single, beautiful native app.</p>
+    <div class="features">
+      <div class="feature">
+        <div class="icon">⚡</div>
+        <h3>Zero latency</h3>
+        <p>USB connection means real-time mirroring with sub-frame latency. No more laggy AirPlay.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📱</div>
+        <h3>Authentic device frame</h3>
+        <p>Your iPhone appears in a beautiful frame with Dynamic Island for the latest models.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🖥️</div>
+        <h3>Fullscreen mode</h3>
+        <p>One click to expand into a stunning gradient background. Perfect for presentations.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📌</div>
+        <h3>Always on top</h3>
+        <p>Pin MirrorKit above every other window so your iPhone stays visible while you work.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔒</div>
+        <h3>Privacy first</h3>
+        <p>Runs 100% locally. No analytics, no telemetry, no network calls. Ever.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🪶</div>
+        <h3>Lightweight</h3>
+        <p>Native Swift. Under 5 MB. Instant launch. Low CPU and battery usage.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h2>Frequently Asked Questions</h2>
+<section id="screenshots">
+  <div class="container">
+    <h2>See it in action</h2>
+    <p class="subtitle">A clean, native experience that feels right at home on macOS.</p>
+    <div class="shots">
+      <img src="shot-1.png" alt="MirrorKit mirroring an iPhone home screen">
+      <img src="shot-2.png" alt="MirrorKit fullscreen mode">
+      <img src="shot-3.png" alt="MirrorKit with an app open">
+      <img src="shot-4.png" alt="MirrorKit waiting for a device">
+    </div>
+  </div>
+</section>
 
-<h3>My iPhone doesn't appear in MirrorKit.</h3>
-<ul>
-  <li>Make sure the cable is plugged in firmly.</li>
-  <li>Try a different USB cable — some charging-only cables don't carry data.</li>
-  <li>On the iPhone, tap <strong>Trust</strong> if a prompt appears, then unlock the phone.</li>
-  <li>Quit MirrorKit and relaunch it.</li>
-</ul>
+<section id="pricing">
+  <div class="container">
+    <h2>One price. Yours forever.</h2>
+    <p class="subtitle">No subscriptions. No in-app purchases. No ads. Buy once and own every future update.</p>
+    <div class="pricing-card">
+      <div class="price">€9.99</div>
+      <div class="price-note">One-time payment · all future updates included</div>
+      <ul>
+        <li>Real-time USB mirroring</li>
+        <li>iPhone device frames</li>
+        <li>Fullscreen presentation mode</li>
+        <li>Always-on-top window</li>
+        <li>Free updates forever</li>
+        <li>Email support</li>
+      </ul>
+      <a href="https://apps.apple.com/app/id6761739430" class="btn btn-primary" style="width: 100%; justify-content: center;">
+        Get MirrorKit
+      </a>
+    </div>
+  </div>
+</section>
 
-<h3>The video stream is laggy or choppy.</h3>
-<ul>
-  <li>Use a USB-C cable for the best throughput on modern Macs and iPhones.</li>
-  <li>Close other heavy apps on your Mac to free up CPU.</li>
-</ul>
-
-<h3>macOS asked for camera permission. Is that normal?</h3>
-<p>Yes. macOS treats your iPhone as a video capture device — the same way QuickTime Player does for iPhone screen recording. MirrorKit does not access any actual camera. Nothing is recorded or transmitted.</p>
-
-<h3>Does MirrorKit support touch input from the Mac to the iPhone?</h3>
-<p>Not in version 1.0. MirrorKit currently focuses on display only.</p>
-
-<h3>Does it work over Wi-Fi?</h3>
-<p>No. MirrorKit requires a USB connection for the lowest possible latency.</p>
-
-<h3>Which iPhones are supported?</h3>
-<p>Every iPhone running iOS 13 or later.</p>
-
-<h3>Which Macs are supported?</h3>
-<p>Any Mac running macOS 14 (Sonoma) or later, Intel or Apple Silicon.</p>
-
-<h2>Contact</h2>
-<p>Still stuck or have a feature request? Email <a href="mailto:trabelsiachraf.devapps@gmail.com">trabelsiachraf.devapps@gmail.com</a> — every message is read.</p>
-
-<p><a href="privacy.html">Privacy Policy</a></p>
+<footer>
+  <div class="container">
+    <div class="links">
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="https://github.com/TrabelsiAchraf/MirrorApp">GitHub</a>
+      <a href="mailto:trabelsiachraf.devapps@gmail.com">Contact</a>
+    </div>
+    <p>© 2026 Achraf Trabelsi · MirrorKit is built with ❤️ in France</p>
+  </div>
+</footer>
 
 </body>
 </html>
