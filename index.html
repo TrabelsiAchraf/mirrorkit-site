@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MirrorKit — Mirror your iPhone on your Mac</title>
-<meta name="description" content="A native macOS app that mirrors your iPhone screen in real time over USB. No latency, no setup, no subscription.">
-<meta property="og:title" content="MirrorKit — Mirror your iPhone on your Mac">
-<meta property="og:description" content="A native macOS app that mirrors your iPhone screen in real time over USB.">
+<title>MirrorKit — Mirror your iPhone or iPad on your Mac</title>
+<meta name="description" content="A native macOS app that mirrors your iPhone or iPad screen in real time over USB. Record, snapshot, zoom, rotate. No latency, no setup, no subscription.">
+<meta property="og:title" content="MirrorKit — Mirror your iPhone or iPad on your Mac">
+<meta property="og:description" content="A native macOS app that mirrors your iPhone or iPad screen in real time over USB. Record, snapshot, zoom, rotate.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📱%3C/text%3E%3C/svg%3E">
 <style>
@@ -224,8 +224,8 @@
 <header class="hero">
   <div class="container">
     <span class="badge">✨ Now available on the Mac App Store</span>
-    <h1>Your iPhone,<br>on your Mac.</h1>
-    <p class="lead">A native macOS app that mirrors your iPhone screen in real time over USB. No Wi-Fi. No latency. No subscriptions.</p>
+    <h1>Your iPhone &amp; iPad,<br>on your Mac.</h1>
+    <p class="lead">A native macOS app that mirrors your iPhone or iPad in real time over USB. Record the stream, snapshot a frame, zoom, rotate — all in a single click. No Wi-Fi. No latency. No subscriptions.</p>
     <div class="hero-cta">
       <a href="https://apps.apple.com/app/id6761739430" class="btn btn-primary">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-3.18 2.6-4.71 2.72-4.78-1.49-2.17-3.79-2.47-4.61-2.5-1.96-.2-3.83 1.16-4.83 1.16-1.01 0-2.55-1.13-4.19-1.1-2.16.03-4.15 1.26-5.27 3.19-2.25 3.9-.58 9.66 1.61 12.83 1.07 1.55 2.34 3.29 4 3.23 1.61-.07 2.22-1.04 4.16-1.04 1.94 0 2.49 1.04 4.19 1 1.73-.03 2.83-1.57 3.89-3.13 1.23-1.79 1.74-3.53 1.77-3.62-.04-.02-3.4-1.31-3.44-5.19zM13.92 3.2c.89-1.08 1.49-2.59 1.32-4.08-1.28.05-2.83.85-3.76 1.93-.83.96-1.55 2.49-1.36 3.96 1.43.11 2.9-.73 3.8-1.81z"/></svg>
@@ -252,8 +252,28 @@
       </div>
       <div class="feature">
         <div class="icon">📱</div>
-        <h3>Authentic device frame</h3>
-        <p>Your iPhone appears in a beautiful frame with Dynamic Island for the latest models.</p>
+        <h3>iPhone &amp; iPad frames</h3>
+        <p>Your device appears in an authentic bezel with Dynamic Island for modern iPhones and uniform bezels for iPads.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🎥</div>
+        <h3>Screen recording</h3>
+        <p>Record the mirrored stream straight to a .mov file in <code>~/Downloads/MirrorKit</code>. Native H.264.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📸</div>
+        <h3>Instant snapshots</h3>
+        <p>Capture the current frame as a PNG with one click or <kbd>⌘⇧S</kbd>. Perfect for docs and bug reports.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔄</div>
+        <h3>Live rotation</h3>
+        <p>Rotate the device frame with <kbd>⌘←</kbd> / <kbd>⌘→</kbd>, or let it follow your iPad's physical orientation automatically.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔍</div>
+        <h3>Pinch to zoom</h3>
+        <p>Zoom in up to 4× with a pinch, drag to pan around pixel-perfect details, <kbd>⌘0</kbd> to reset.</p>
       </div>
       <div class="feature">
         <div class="icon">🖥️</div>
@@ -263,7 +283,12 @@
       <div class="feature">
         <div class="icon">📌</div>
         <h3>Always on top</h3>
-        <p>Pin MirrorKit above every other window so your iPhone stays visible while you work.</p>
+        <p>Pin MirrorKit above every other window so your device stays visible while you work.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">⌨️</div>
+        <h3>Keyboard first</h3>
+        <p>Every action has a shortcut — record, snapshot, rotate, toggle frame, zoom. Open the Capture menu to discover them.</p>
       </div>
       <div class="feature">
         <div class="icon">🔒</div>
@@ -275,6 +300,11 @@
         <h3>Lightweight</h3>
         <p>Native Swift. Under 5 MB. Instant launch. Low CPU and battery usage.</p>
       </div>
+      <div class="feature">
+        <div class="icon">🧩</div>
+        <h3>Multi-device picker</h3>
+        <p>Plug in several iPhones or iPads and switch between them from the floating toolbar in one click.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -285,9 +315,9 @@
     <p class="subtitle">A clean, native experience that feels right at home on macOS.</p>
     <div class="shots">
       <img src="shot-1.png" alt="MirrorKit mirroring an iPhone home screen">
-      <img src="shot-2.png" alt="MirrorKit fullscreen mode">
-      <img src="shot-3.png" alt="MirrorKit with an app open">
-      <img src="shot-4.png" alt="MirrorKit waiting for a device">
+      <img src="shot-2.png" alt="MirrorKit mirroring an iPad in landscape">
+      <img src="shot-3.png" alt="MirrorKit with the floating toolbar visible">
+      <img src="shot-4.png" alt="MirrorKit fullscreen presentation mode">
     </div>
   </div>
 </section>
@@ -300,10 +330,13 @@
       <div class="price">€9.99</div>
       <div class="price-note">One-time payment · all future updates included</div>
       <ul>
-        <li>Real-time USB mirroring</li>
-        <li>iPhone device frames</li>
+        <li>Real-time USB mirroring (iPhone &amp; iPad)</li>
+        <li>Video recording &amp; instant snapshots</li>
+        <li>Pinch-to-zoom, pan, rotation</li>
+        <li>Authentic device frames</li>
         <li>Fullscreen presentation mode</li>
         <li>Always-on-top window</li>
+        <li>Full keyboard shortcuts</li>
         <li>Free updates forever</li>
         <li>Email support</li>
       </ul>
