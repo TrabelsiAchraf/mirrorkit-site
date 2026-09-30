@@ -2,7 +2,14 @@
 
 Landing page, privacy policy and support page for [MirrorKit](https://github.com/TrabelsiAchraf/MirrorApp) — a native macOS app that mirrors your iPhone or iPad on your Mac over USB.
 
-🌐 **Live site**: https://trabelsiachraf.github.io/mirrorkit-site/
+## Links
+
+- Website: <https://trabelsiachraf.com/mirrorkit-site/>
+- Support: <https://trabelsiachraf.com/mirrorkit-site/support.html>
+- Privacy: <https://trabelsiachraf.com/mirrorkit-site/privacy.html>
+- Accessibility: <https://trabelsiachraf.com/mirrorkit-site/accessibility.html>
+- Mac App Store: <https://apps.apple.com/app/id6761739430>
+- App source: <https://github.com/TrabelsiAchraf/MirrorApp>
 
 ## Contents
 
