@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MirrorKit — Accessibility</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 24px; color: #1d1d1f; line-height: 1.6; }
+  h1 { font-size: 32px; margin-bottom: 4px; }
+  h2 { font-size: 20px; margin-top: 32px; }
+  .updated { color: #6e6e73; font-size: 14px; margin-bottom: 32px; }
+  a { color: #0071e3; }
+  code { background: #f5f5f7; padding: 2px 6px; border-radius: 4px; font-size: 90%; }
+  .container { max-width: 720px; margin: 0 auto; }
+  footer {
+    padding: 60px 0 40px; margin-top: 48px; border-top: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: center; color: #6e6e73; font-size: 14px;
+  }
+  footer a { color: inherit; text-decoration: none; }
+  footer .links {
+    display: flex; justify-content: center; gap: 28px; margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  footer .links a:hover, footer p a:hover { color: #1d1d1f; }
+</style>
+</head>
+<body>
+
+<h1>MirrorKit — Accessibility</h1>
+<p class="updated">Last updated: September 30, 2026</p>
+
+<h2>Our commitment</h2>
+<p>MirrorKit is a small macOS app built and maintained by one person. I want it to be usable by as many people as possible, and I would rather tell you plainly what works and what does not than overstate it. This page lists only what is implemented in the app today, and it does not claim conformance to any accessibility standard.</p>
+
+<h2>What MirrorKit supports</h2>
+
+<h3>Keyboard shortcuts</h3>
+<p>The main actions are in the menu bar and have keyboard shortcuts:</p>
+<ul>
+  <li><code>⌘,</code> — open Settings</li>
+  <li><code>⌘Q</code> — quit MirrorKit</li>
+  <li><code>⌘T</code> — toggle Always on Top (Window menu)</li>
+  <li><code>⌘R</code> — start or stop recording (Capture menu)</li>
+  <li><code>⌘S</code> — take a snapshot (Capture menu)</li>
+  <li><code>⌘←</code> and <code>⌘→</code> — rotate left and right (Capture menu)</li>
+  <li><code>⇧⌘R</code> — toggle rotation (works as a shortcut; it is not shown in the menu)</li>
+  <li><code>⌘0</code> — reset zoom (Capture menu)</li>
+  <li><code>A</code> (no modifier) — toggle annotation mode. It works only while the mirror window is in front and you are not typing in a text field.</li>
+  <li><code>⇧⌘O</code> — open the captures folder (Capture menu)</li>
+</ul>
+
+<h3>Labels on the floating toolbar</h3>
+<p>The floating toolbar's buttons have accessibility labels, and hovering shows a tooltip with the same text: close, minimize and expand the window; start or stop recording; take a snapshot; rotate; and the device and settings menu, which also exposes the connected device name. In Settings, the bezel style and bezel color pickers have accessible names.</p>
+
+<h2>Known limitations</h2>
+<ul>
+  <li><strong>The mirrored screen is not readable by VoiceOver on the Mac.</strong> Your iPhone or iPad screen is shown as a live video image, so the text and controls inside it are not exposed as accessible elements. To use VoiceOver with the device's content, use VoiceOver on the iPhone or iPad itself.</li>
+  <li><strong>The annotation toolbar has no accessibility labels.</strong> Its tool, undo and clear buttons are not named for VoiceOver, so VoiceOver users cannot reliably identify them. Annotation mode can be toggled with the <code>A</code> key.</li>
+  <li><strong>Display only.</strong> MirrorKit shows the device screen and does not send touch or keyboard input to the device.</li>
+  <li><strong>Not formally tested.</strong> I have not carried out a full VoiceOver or assistive-technology review of the app, so other barriers may exist.</li>
+</ul>
+
+<h2>Report a problem</h2>
+<p>If you run into an accessibility barrier, or have a suggestion, email <a href="mailto:trabelsiachraf.devapps@gmail.com">trabelsiachraf.devapps@gmail.com</a>. Every message is read.</p>
+
+<p><a href="https://trabelsiachraf.com/mirrorkit-site/">Back to home</a></p>
+
+<footer>
+  <div class="container">
+    <div class="links">
+      <a href="https://trabelsiachraf.com/mirrorkit-site/">Home</a>
+      <a href="https://trabelsiachraf.com/mirrorkit-site/support.html">Support</a>
+      <a href="https://trabelsiachraf.com/mirrorkit-site/privacy.html">Privacy Policy</a>
+      <a href="https://trabelsiachraf.com/mirrorkit-site/accessibility.html">Accessibility</a>
+      <a href="https://apps.apple.com/app/id6761739430">Mac App Store</a>
+      <a href="https://github.com/TrabelsiAchraf/MirrorApp">GitHub</a>
+      <a href="mailto:trabelsiachraf.devapps@gmail.com">Contact</a>
+    </div>
+    <p>© 2026 <a href="https://trabelsiachraf.com/">Achraf Trabelsi</a> · MirrorKit is built with ❤️</p>
+  </div>
+</footer>
+
+</body>
+</html>
