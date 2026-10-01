@@ -10,6 +10,7 @@ Landing page, privacy policy and support page for [MirrorKit](https://github.com
 - Accessibility: <https://trabelsiachraf.com/mirrorkit-site/accessibility.html>
 - Mac App Store: <https://apps.apple.com/app/id6761739430>
 - App source: <https://github.com/TrabelsiAchraf/MirrorApp>
+- Contact: <trabelsiachraf.devapps@gmail.com>
 
 ## Contents
 
