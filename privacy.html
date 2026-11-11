@@ -26,21 +26,27 @@
 <body>
 
 <h1>MirrorKit — Privacy Policy</h1>
-<p class="updated">Last updated: April 7, 2026</p>
+<p class="updated">Last updated: November 12, 2026</p>
 
 <p>MirrorKit ("the app") is a native macOS application that displays the screen of an iPhone connected to the Mac via USB. This Privacy Policy explains how the app handles data.</p>
 
 <h2>Data Collection</h2>
-<p><strong>MirrorKit does not collect any personal data.</strong> The app does not have user accounts, does not connect to any server, does not include analytics, and does not include advertising or tracking SDKs.</p>
+<p><strong>MirrorKit does not collect any personal data.</strong> The app has no user accounts and no advertising or tracking. Since version 1.3.0, it sends anonymous usage statistics, described below, which you can turn off.</p>
+
+<h2>Anonymous Usage Statistics</h2>
+<p>To understand which features are used and which devices people mirror, MirrorKit sends a short list of anonymous events to <a href="https://telemetrydeck.com/privacy/">TelemetryDeck</a>, a privacy-focused analytics service. TelemetryDeck stores no IP address and only a hashed, anonymous identifier, so the statistics cannot be linked to you and are not used for tracking.</p>
+<p>What is sent: that mirroring started (iPhone or iPad, and the model family such as "iPad Pro 11-inch"), the kind of error when mirroring fails, that a snapshot or a recording was saved (with its length rounded to under 1 minute, 1 to 5 minutes or over 5 minutes), which annotation tools are used, the frame style and color chosen, and that the first-run guide was completed.</p>
+<p>What is never sent: your device's name, anything shown on its screen, your snapshots and recordings, file names or locations, or anything you type.</p>
+<p>To turn it off, open MirrorKit › Settings › Privacy and uncheck "Share anonymous statistics". Nothing is sent from then on.</p>
 
 <h2>Camera Permission</h2>
 <p>At first launch, macOS asks for permission to access the camera. This permission is required because macOS exposes the iPhone connected via USB as an <code>AVCaptureDevice</code> — exactly the same mechanism used by QuickTime Player for iOS screen recording. MirrorKit only uses this permission to receive the video stream from the connected iPhone. No actual camera is accessed, and nothing is recorded or stored.</p>
 
 <h2>Network Activity</h2>
-<p>MirrorKit does not make any network requests. The app works entirely offline. The video stream from your iPhone stays on your Mac and is never sent anywhere.</p>
+<p>Mirroring works entirely offline. The video stream from your iPhone or iPad stays on your Mac and is never sent anywhere. The only network requests are the anonymous statistics above, and none are made once they are turned off.</p>
 
 <h2>Third-Party Services</h2>
-<p>MirrorKit does not use any third-party services, SDKs, or libraries that collect data.</p>
+<p>MirrorKit uses one third-party service: TelemetryDeck, for the anonymous usage statistics described above. It uses no advertising, attribution or tracking SDKs.</p>
 
 <h2>Children's Privacy</h2>
 <p>MirrorKit does not knowingly collect any data from children or anyone else.</p>
